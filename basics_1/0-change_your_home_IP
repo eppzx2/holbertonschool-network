@@ -1,5 +1,15 @@
 #!/usr/bin/env bash
-#sed bir fayli acmadann uzerinde deyisilik aparir
-[ "$EUID" -ne 0 ] && echo "Run as root!" && exit 1
-sed -i '/127\.0\.0\.1\s\+localhost/c\127.0.0.2 localhost' /etc/hosts
-grep -q "facebook.com" /etc/hosts || echo "8.8.8.8 facebook.com" >> /etc/hosts
+#fdghfxesdj
+if [[ $EUID -ne 0 ]]; then
+   echo "Bu skripti root huquqlari ile calisdirin."
+   exit 1
+fi
+
+HOSTS_FILE="/etc/hosts"
+sed -i '/^127\.0\.0\.\+.*localhost/d' "${HOSTS_FILE}"
+
+echo "127.0.0.2    localhost" >> "${HOSTS_FILE}"
+
+sed -i '/facebook\.com/d' "${HOSTS_FILE}"
+
+echo "8.8.8.8      facebook.com" >> "${HOSTS_FILE}"
