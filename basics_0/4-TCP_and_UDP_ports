@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
 #netstat, ss, lsof 
-sudo netstat -plunt
+ss -tulnp
+ss -xlnp
